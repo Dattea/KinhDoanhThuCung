@@ -1,0 +1,81 @@
+﻿@using KinhDoanhThuCung.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<THUCUNG>
+@{
+    ViewBag.Title = "TCtheoNCC";
+    Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
+}
+
+<h3 style="text-align:center; color:blue">THÚ CƯNG THEO NHÀ CUNG CẤP</h3>
+<div class="row">
+    @foreach (var tc in Model)
+    {
+        <div class="toppet">
+            <div class="thumbnail">
+                <a href="@Url.Action("Details","KDThuCung", new { id = tc.MATC })">
+                    <img alt="@tc.GIONG.TENGIONG" src="~/HinhThuCung/@tc.ANH" width="200" />
+                    <div>
+                        <br />
+                        <h5 style="text-align:center">
+                            @tc.GIONG.TENGIONG
+                        </h5>
+                        <p></p>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-left">15 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+<center>
+    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+    <div class="Menu">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</center>
+<style>
+    .thumbnail {
+        flex-basis: 25%;
+        padding: 10px;
+        min-width: 200px;
+        margin-top: 20px;
+        transition: 0.6s;
+        float: left;
+        width: 250px;
+        height: 300px;
+    }
+
+        .thumbnail img {
+            width: 200px;
+            height: 230px;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-5px);
+        }
+
+    .rating {
+        color: #ff523b;
+        text-align: center;
+    }
+
+    h6 {
+        color: darkblue;
+        font-size: 35px;
+        padding-top: 50px;
+    }
+
+    .Menu li {
+        display: inline;
+    }
+</style>

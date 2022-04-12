@@ -1,0 +1,12 @@
+﻿@model IEnumerable<KinhDoanhThuCung.Models.LOAI>
+<p class="lead">LOẠI THÚ CƯNG</p>
+ <div class="list-group">
+        @foreach (var tc in Model)
+        {
+             <a href="@Url.Action("TCTheoloai","KDThuCung", new { id = tc.MALOAI })" class="list-group-item">
+                 @tc.TENLOAI
+             </a>
+           
+        }
+
+  </div>

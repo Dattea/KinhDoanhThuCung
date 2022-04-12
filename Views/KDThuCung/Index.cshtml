@@ -1,0 +1,153 @@
+﻿
+@using KinhDoanhThuCung.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<THUCUNG>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTrangChu.cshtml";
+}
+<div class="index">
+    <center>
+        <div class="slide">
+            <div class="row carousel-holder">
+                <div class="col-md-10">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" src="~/HinhThuCung/slide1.jpg" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="~/HinhThuCung/slide2.jpg" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="~/HinhThuCung/slide3.jpg" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+
+    <center><h6>HOT PET</h6></center>
+    <div class="row">
+        @foreach (var tc in Model)
+        {
+            <div class="toppet">
+                <div class="thumbnail">
+                    <a href="@Url.Action("Details", "KDThuCung", new { id = tc.MATC })">
+                        <img alt="@tc.GIONG.TENGIONG" src="~/HinhThuCung/@tc.ANH" />
+                        <div>
+                            <h5 style="text-align:center">
+                                @tc.GIONG.TENGIONG
+                            </h5>
+                            <p></p>
+                        </div>
+                        <div class="rating">
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </p>
+                            <center><p class="pull-right">15 reviews</p></center>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<center>
+    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+    <div class="Menu">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</center>
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<style>
+    h6 {
+        text-align: center;
+        margin: 10px 0;
+        position: relative;
+        line-height: 60px;
+        color: #555;
+        color: darkblue;
+        font-size: 35px;
+        padding-top: 50px;
+    }
+
+        h6::after {
+            content: "";
+            background: blue;
+            width: 80px;
+            height: 5px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    .thumbnail {
+        flex-basis: 25%;
+        padding: 10px;
+        min-width: 200px;
+        margin-top: 20px;
+        transition: 0.6s;
+        float: left;
+        width: 250px;
+        height: 300px;
+    }
+
+        .thumbnail img {
+            width: 200px;
+            height: 230px;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-5px);
+        }
+
+    .rating {
+        color: #ff523b;
+        text-align: center;
+    }
+
+    .index {
+        max-width: 1100px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+    }
+
+    .slide {
+        width: 800px;
+        height: 395px;
+    }
+
+    .slide-image {
+        width: 800px;
+        padding-left: 0px;
+        padding-right: 0px;
+        height: 400px;
+    }
+
+    .Menu li {
+        display: inline;
+    }
+</style>
+
